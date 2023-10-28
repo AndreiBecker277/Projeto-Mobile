@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import Principal from "../../Principal";
+import Principal from "../layouts/Principal";
 import { HomeProps } from "../types";
 
 const HomeScreen = ({ navigation, route }: HomeProps) => {
