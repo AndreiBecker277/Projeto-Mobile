@@ -18,7 +18,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const HomeNavigator = () => {
   return (
 
-    <Stack.Navigator initialRouteName="Login">
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Detalhes" component={DetalhesScreen} />
       <Stack.Screen name="Cadastro_ADM" component={CadastroScreen} />
