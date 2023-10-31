@@ -21,7 +21,7 @@ const Principal = ({ navigation, route }: HomeProps) => {
                     </Pressable>
 
                     <Pressable style={styles.botao}
-                        onPress={() => navigation.navigate(`ListarCliente`)} >
+                        onPress={() => navigation.navigate(`ListarCliente`, {buscar: ()=>{}})} >
                         <Text style={{ fontSize: 16, color: 'black' }}>Lista de Clientes</Text>
                     </Pressable>
                     <Pressable style={styles.botao}

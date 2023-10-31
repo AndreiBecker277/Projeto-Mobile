@@ -6,7 +6,7 @@ import { ListarClienteProps } from "../types";
 import AlterarCliente from "./AlterarCliente";
 
 export default ({ navigation, route }: ListarClienteProps) => {
-
+    
     const [cliente, SetCliente] = useState([] as ICliente[]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -60,7 +60,11 @@ export default ({ navigation, route }: ListarClienteProps) => {
                 data={cliente}
                 renderItem={(info) => {
                     return (
+
                         <View style={styles.card}>
+                            <Pressable
+                            onPress={() => {route.params.buscar(info.item.nome, info.item.cpf); 
+                            navigation.goBack()}}>
                             <View style={styles.dados_card}>
                                 <Text>{info.index}</Text>
                                 <Text>{info.item.nome}</Text>
@@ -69,9 +73,9 @@ export default ({ navigation, route }: ListarClienteProps) => {
                                 <Text>{info.item.numeroRua}</Text>
                                 <Text>{info.item.bairro}</Text>
                                 <Text>{info.item.dataNasc}</Text>
-
+                            
                             </View>
-
+                            </Pressable>
                             <View style={styles.botao_alterar}>
                                 <Pressable
                                     onPress={() => alterarCliente(info.item.id)}>

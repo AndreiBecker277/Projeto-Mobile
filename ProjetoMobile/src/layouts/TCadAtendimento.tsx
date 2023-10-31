@@ -1,5 +1,5 @@
 import firestore from "@react-native-firebase/firestore";
-import { Alert, Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { CadAtendimentoProps,  } from "../types";
 import { useState } from "react";
 
@@ -8,7 +8,43 @@ export default ({ navigation, route }: CadAtendimentoProps) => {
     const [hora, setHora] = useState('');
     const [data, setData] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [nome, setNome] = useState('');
+    const [cpf, setCpf] = useState('');
+    function validarCampoTexto() {
+        // Use uma expressão regular para verificar se o texto contém apenas letras maiúsculas ou minúsculas.
+        // O padrão /^[A-Za-z]+$/ significa que a string deve começar e terminar com letras,
+        // e o + indica que pode haver uma ou mais letras no meio.
+        const regex = /^[A-Za-z]+$/;
 
+        if (!regex.test(descricao)) {
+            console.log("O campo so pode possuir letras")
+            return false;
+        }
+
+    };
+
+    function validarCampoNumerico() {
+        // Use uma expressão regular para verificar se o texto contém apenas números.
+        // O padrão /^[0-9]+$/ significa que a string deve consistir apenas em dígitos numéricos.
+        const regex = /^[0-9]+$/;
+
+        if (!regex.test(hora)) {
+            console.log("O texto contém caracteres não numéricos.");
+            return false;
+        }
+
+        if (!regex.test(data)) {
+            console.log("O texto contém caracteres não numéricos.");
+            return false;
+        }
+
+    };
+
+
+    function buscarCliente(nome: string, cpf: string) {
+          setNome(nome);
+          setCpf(cpf);
+    }
     function cadastrar() {
         setIsLoading(true);
 
@@ -32,9 +68,20 @@ export default ({ navigation, route }: CadAtendimentoProps) => {
 
     }
 
-    function listarClientes (id:string)
+    
     return (
         <View>
+            
+            <Text>Nome: {nome}</Text>
+            <Text>CPF:{cpf}</Text>
+            
+            <Button 
+            title="Buscar Cliente"
+            onPress={() => navigation.navigate("ListarCliente", {buscar: buscarCliente} )}
+                
+                />
+
+            
             <Text>Data:</Text>
             <TextInput
                 style={styles.caixa_texto}

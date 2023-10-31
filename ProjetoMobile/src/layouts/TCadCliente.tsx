@@ -13,7 +13,58 @@ export default ({ navigation, route }: CadUsuProps) => {
     const [dataNasc, setDataNasc] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
+    function validarCampoTexto() {
+        // Use uma expressão regular para verificar se o texto contém apenas letras maiúsculas ou minúsculas.
+        // O padrão /^[A-Za-z]+$/ significa que a string deve começar e terminar com letras,
+        // e o + indica que pode haver uma ou mais letras no meio.
+        const regex = /^[A-Za-z]+$/;
+
+        if (!regex.test(nome)) {
+            console.log("O campo so pode possuir letras")
+            return false;
+        }
+
+        if (!regex.test(rua)) {
+            console.log("O campo so pode possuir letras")
+            return false;
+        }
+
+        if (!regex.test(bairro)) {
+            console.log("O campo so pode possuir letras")
+            return false;
+        }
+
+    };
+
+    function validarCampoNumerico() {
+        // Use uma expressão regular para verificar se o texto contém apenas números.
+        // O padrão /^[0-9]+$/ significa que a string deve consistir apenas em dígitos numéricos.
+        const regex = /^[0-9]+$/;
+
+        if (!regex.test(numeroRua)) {
+            console.log("O texto contém caracteres não numéricos.");
+            return false;
+        }
+
+        if (!regex.test(dataNasc)) {
+            console.log("O texto contém caracteres não numéricos.");
+            return false;
+        }
+
+        if (!regex.test(cpf)) {
+            console.log("O texto contém caracteres não numéricos.");
+            return false;
+        }
+
+    };
+
+
+
+
     function cadastrar() {
+
+        validarCampoTexto();
+        validarCampoNumerico();
 
         setIsLoading(true);
 
@@ -39,6 +90,7 @@ export default ({ navigation, route }: CadUsuProps) => {
             .finally(() => setIsLoading(false));
 
     }
+
     return (
         <ImageBackground source={require('../assets/Moon2.jpg')} style={styles.img}>
 
@@ -47,11 +99,12 @@ export default ({ navigation, route }: CadUsuProps) => {
                 <Image style={styles.img_logo}
                     source={require('../assets/IconMoon.png')} />
                 <Text style={styles.text}>Nome:</Text>
-                <TextInput 
+                <TextInput
                     style={styles.caixa_texto}
                     onChangeText={(text) => { setNome(text) }} />
                 <Text style={styles.text}>CPF:</Text>
                 <TextInput
+
                     style={styles.caixa_texto}
                     onChangeText={(text) => { setCpf(text) }} />
                 <Text style={styles.text}>Rua:</Text>
@@ -89,8 +142,8 @@ const styles = StyleSheet.create({
         color: 'black',
         backgroundColor: 'white',
         borderRadius: 4,
-       
-        
+
+
     },
 
     img_logo: {
@@ -110,7 +163,7 @@ const styles = StyleSheet.create({
 
     },
     caixa_texto: {
-        width: '70%',       
+        width: '70%',
         borderWidth: 1,
         borderRadius: 4,
         margin: 3,

@@ -24,17 +24,17 @@ export default ({ navigation, route }: AlterarClienteProps) => {
             .doc(id)
             .get();
 
-        const nota = {
+        const cliente = {
             id: resultado.id,
             ...resultado.data()
         } as ICliente;
 
-        setNome(nota.nome);
-        setCpf(nota.cpf);
-        setRua(nota.rua);
-        setNumRua(nota.numeroRua);
-        setbairro(nota.bairro);
-        setDataNasc(nota.dataNasc);
+        setNome(cliente.nome);
+        setCpf(cliente.cpf);
+        setRua(cliente.rua);
+        setNumRua(cliente.numeroRua);
+        setbairro(cliente.bairro);
+        setDataNasc(cliente.dataNasc);
         setIsLoading(false);
 
     };
@@ -53,7 +53,12 @@ export default ({ navigation, route }: AlterarClienteProps) => {
             .collection('Cliente')
             .doc(id)
             .update({
-
+                nome,
+                cpf,
+                rua,
+                numeroRua,
+                bairro,
+                dataNasc,
                 created_at: firestore.FieldValue.serverTimestamp()
             })
             .then(() => {
